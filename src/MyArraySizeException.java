@@ -1,6 +1,6 @@
 public class MyArraySizeException extends Exception {
-    public MyArraySizeException(Throwable cause) {
-        super(cause);
+    public MyArraySizeException() {
+        super();
     }
 
     // По условиям задачи это исключение не должно давать подробную информацию
