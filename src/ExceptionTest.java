@@ -12,14 +12,15 @@ public class ExceptionTest {
     public int sum(String[][]arr) throws MyArraySizeException, MyArrayDataException {
         this.arr = arr;
 
-            for (int i =0; i <4; i++) {
-                for (int j =0; j <4; j++) {
+        if (arr.length != 4 || arr[0].length != 4 || arr[1].length != 4 || arr[2].length != 4 || arr[3].length != 4) {
+            throw new MyArraySizeException();
+        } // Исправляю ошибку, забыл, что массив может быть не только меньше, но и больше по размеру
+        else {
+            for (int i = 0; i < 4; i++) {
+                for (int j = 0; j < 4; j++) {
                     // Перебираем циклом все ячейки, для каждой запускаем блок try-catch
                     try {
-                    sum += Integer.parseInt(arr[i][j]);
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        throw new MyArraySizeException(e);
-                        // Если ячейка за пределами индекса, кидает исключение
+                        sum += Integer.parseInt(arr[i][j]);
                     } catch (NumberFormatException e) {
                         // Если не можем преобразовать в int, создаем кастомное исключение
                         MyArrayDataException err = new MyArrayDataException(e);
@@ -31,7 +32,8 @@ public class ExceptionTest {
                 }
             }
 
-        return sum;
+            return sum;
+        }
     }
 }
 
